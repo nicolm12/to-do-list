@@ -9,6 +9,7 @@ const Todo = ({ todos, completeTodo, removeTodo, updateTodo }) => {
       id: null,
       value: ''
     });
+    console.log(...todos)
   
     const submitUpdate = value => {
       updateTodo(edit.id, value);
