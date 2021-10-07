@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 
 import Form from './form'
 import Todo from './todo.js';
@@ -48,20 +48,39 @@ const completeTodo = id => {
   };
   const filterNote = async(objNote, searchNote) => {
    
-      const notaFiltradaByTitle = await objNote.filter(list=>list.text.toLowerCase().includes(searchNote.toLowerCase()))
-      // console.log(objNote,"esto es obj")
-      // (nota => nota.value.toLowerCase().includes(searchNote.toLowerCase()))
-      setTodos(notaFiltradaByTitle)
-      // console.log(nota)
+     const notaFiltradaByTitle = await objNote.filter(list=>list.text.toLowerCase().includes(searchNote.toLowerCase()))
+       return notaFiltradaByTitle
+//       // (nota => nota.value.toLowerCase().includes(searchNote.toLowerCase()))
+      // setTodos(notaFiltradaByTitle)
+//       // console.log(nota)
   
 }
 filterNote(todos,searchNote)
 
+const filter=()=>{
+  if(searchNote ===""){
+   console.log(todos);
+  }else{
+    filterNote(todos ,searchNote)
+  }
+
+}
+
+
+useEffect(() => {
+ filter();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
+
+
+
     return (
         <div className='todo-app'>
-          <input type="text" placeholder="Buscar mi nota"  
-            value={searchNote} onChange={inputChange} />
-          <button type="button" onClick={filterNote}><i className="fas fa-search"></i></button>
+          <div><input type="text" placeholder="Buscar mi nota"  
+            value={searchNote} onChange={inputChange} onKeyUp={()=>filterNote} />
+            </div>
+          
+          {/* <button type="button" onClick= ><i className="fas fa-search"></i></button> */}
 
 
            <h1>que vamos hacer hoy</h1>

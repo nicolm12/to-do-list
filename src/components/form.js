@@ -15,9 +15,9 @@ function Form(props) {
 
     const inputRef = useRef(null)
 
-    useEffect(() => {
-        inputRef.current.focus()
-    })
+    // useEffect(() => {
+    //     inputRef.current.focus()
+    // })
     const handleChange = e => {
         setInput(e.target.value)
     }
@@ -80,7 +80,7 @@ function Form(props) {
                 <>
                 <div className="cats"> 
                     <input type='number' className="input-cats" onChange={event => setbreed(event.target.value)} />
-                    <button className="button-cats"  onClick={ list}><FaCat className="icon-cat"></FaCat></button>
+                    <button className="button-cats"  onClick={list}><FaCat className="icon-cat"></FaCat></button>
                    
                     
                     </div>
