@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+
 import Form from './form'
 import Todo from './todo.js';
 
@@ -16,6 +17,7 @@ function TodoList() {
     
    
 }
+
 
 const removeTodo = id=>{
     const removeArray =[...todos].filter(todo => todo.id !==id)
@@ -43,15 +45,19 @@ const completeTodo = id => {
 
     return (
         <div className='todo-app'>
-           <h1>que vamos hacer hoy</h1> 
+           <h1>que vamos hacer hoy</h1>
+          
           <Form onSubmit={addTodo}/>
+          
          <Todo
         todos={todos}
         completeTodo ={completeTodo}
         removeTodo={removeTodo}
         updateTodo={updateTodo}
+       
 
           />
+          
         </div>
     )
 }

@@ -50,7 +50,24 @@
   .input::placeholder {
     color: #061D26;
   }
-  
+  .cats{
+      margin-bottom: 10px;
+  }
+  .input-cats{
+      top: 40px;
+     
+    padding: 14px 32px 14px 16px;
+    border-radius: 4px 0 0 4px;
+    border: 2px solid #A67458;
+    width: 70px;
+    outline: none;
+    background: transparent;
+    color: black;
+    justify-content: center;
+  }
+  .input-cats::placeholder {
+    color: #061D26;
+  }
   .button {
     padding: 16px;
     border: none;
@@ -61,6 +78,21 @@
     ;
     color: #fff;
     text-transform: capitalize;
+  }
+  .button-cats{
+    
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    outline: none;
+    background:#A67458;
+    color: #fff;
+    text-transform: capitalize;
+    width: 70px;
+    height: 50px;
+  }
+  .icon-cat{
+      width: 70px;
   }
   
   
