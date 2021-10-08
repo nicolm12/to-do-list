@@ -1,42 +1,43 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState, useEffect, Component } from 'react'
+import { unmountComponentAtNode } from 'react-dom';
 
 import Form from './form'
 import Todo from './todo.js';
 
 function TodoList() {
-    const [todos, setTodos]= useState([]);
-    
+  const [todos, setTodos] = useState([]);
 
-    const addTodo = todo =>{
-        if (!todo.text || /^\$*$/.test(todo.text)){
-        return;
+  const addTodo = todo => {
+    
+    if (!todo.text || /^\$*$/.test(todo.text)) {
+     
+      return;
 
     }
-    const newTodos=[todo, ...todos]
+    const newTodos = [todo, ...todos]
 
     setTodos(newTodos)
-    
-   
-}
+    console.log(newTodos)
 
 
+  }
 
 
-const removeTodo = id=>{
-    const removeArray =[...todos].filter(todo => todo.id !==id)
+  const removeTodo = id => {
+    const removeArray = [...todos].filter(todo => todo.id !== id)
     setTodos(removeArray)
-}
+  }
 
-const updateTodo = (todoId, newValue) =>{
-    if (!newValue.text || /^\$*$/.test(newValue.text)){
-        return;
+  const updateTodo = (todoId, newValue) => {
+    if (!newValue.text || /^\$*$/.test(newValue.text)) {
+      return;
     }
-    setTodos(prev =>prev.map(item =>(item.id === todoId ? newValue : item))
+    setTodos(prev => prev.map(item => (item.id === todoId ? newValue : item))
     );
-}
+  }
 
 
-const completeTodo = id => {
+  const completeTodo = id => {
     let updateTodos = todos.map(todo => {
       if (todo.id === id) {
         todo.isComplete = !todo.isComplete;
@@ -45,32 +46,29 @@ const completeTodo = id => {
     });
     setTodos(updateTodos);
   };
+  
 
 
 
+  return (
+    <div className='todo-app'>
+      
 
+      <h1>MI TO DO LIST</h1>
 
+      <Form onSubmit={addTodo} />
 
-
-
-    return (
-        <div className='todo-app'>
-         
-           <h1>MI TO DO LIST</h1>
-          
-          <Form onSubmit={addTodo}/>
-          
-         <Todo
+      <Todo
         todos={todos}
-        completeTodo ={completeTodo}
+        completeTodo={completeTodo}
         removeTodo={removeTodo}
         updateTodo={updateTodo}
-       
 
-          />
-          
-        </div>
-    )
+
+      />
+
+    </div>
+  )
 }
 
 export default TodoList

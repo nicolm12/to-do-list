@@ -1,19 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react'
-import {FaCat} from 'react-icons/fa'
+import { FaCat } from 'react-icons/fa'
 
 function Form(props) {
     const [input, setInput] = useState(props.edit ? props.edit.value : '');
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
-    const [bred, setbreed] = useState({
-        value:''
+    const [bred, setBreed] = useState({
+        value: ''
     }
 
     )
 
 
-    const inputRef = useRef(null)
+    // const inputRef = useRef(null)
 
     // useEffect(() => {
     //     inputRef.current.focus()
@@ -23,13 +23,36 @@ function Form(props) {
     }
     const list = () => {
 
-        const i = items.sort(() => Math.random() - 0.5)
-        const finalList = i.slice(0, bred)
-        const t = finalList.map(item => (
-           setbreed(item.breed)
-          
+        fetch(`https://catfact.ninja/facts?limit=${bred}`)
+            .then(res => res.json())
+            .then((result) => {
+                result.data.forEach(element => {
+                    console.log("element",element)
+                    props.onSubmit({
+                        id: Math.floor(Math.random() * 10000),
+                        text: element.fact
+                    })
 
-        )) 
+                });
+                setIsLoaded(true);
+                setItems(result.data);
+                // console.log(result.data)
+
+            },
+                (error) => {
+                    console.log(error)
+                    setIsLoaded(true);
+                    setError(error);
+                }
+            )
+
+        // const i = items.sort(() => Math.random() - 0.5)
+        // const finalList = i.slice(0, bred)
+        // const t = finalList.map(item => (
+        //    setbreed(item.breed)
+
+
+        // )) 
     }
 
 
@@ -39,27 +62,13 @@ function Form(props) {
             id: Math.floor(Math.random() * 10000),
             text: input
         });
-         setInput(bred)
+        setInput('')
     };
-    useEffect(() => {
-        fetch("https://catfact.ninja/breeds?limit=1")
-            .then(res => res.json())
-            .then((result) => {
-                setIsLoaded(true);
-                setItems(result.data);
 
-            },
-                (error) => {
-                    console.log(error)
-                    setIsLoaded(true);
-                    setError(error);
-                }
-            )
-    }, [])
- 
+
 
     return (
-        
+
         <form className="todo-form" onSubmit={handleSubmit}>
             {props.edit ? (
                 <>
@@ -71,20 +80,20 @@ function Form(props) {
                         name="text"
                         className="input edit"
                         onChange={handleChange}
-                        ref={inputRef}
+
                     />
                     <button onClick={handleSubmit} className="button">Editar</button>
 
                 </>
             ) : (
                 <>
-                <div className="cats"> 
-                    <input type='number' className="input-cats" onChange={event => setbreed(event.target.value)} />
-                    <button className="button-cats"  onClick={list}><FaCat className="icon-cat"></FaCat></button>
-                   
-                    
+                    <div className="cats">
+                        <input type='number' className="input-cats" onChange={event => setBreed(event.target.value)} />
+                        <button className="button-cats" onClick={list}><FaCat className="icon-cat"></FaCat></button>
+
+
                     </div>
-                   
+
                     <input
                         type="text"
                         placeholder="Añadir tarea"
@@ -92,7 +101,7 @@ function Form(props) {
                         name="text"
                         className="input "
                         onChange={handleChange}
-                        ref={inputRef}
+
                     />
                     <button onClick={handleSubmit} className="button">Añadir tarea</button>
 

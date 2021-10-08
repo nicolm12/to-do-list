@@ -9,7 +9,7 @@ const Todo = ({ todos, completeTodo, removeTodo, updateTodo }) => {
       id: null,
       value: ''
     });
-    console.log(...todos)
+    // console.log(...todos)
   
     const submitUpdate = value => {
       updateTodo(edit.id, value);
@@ -17,6 +17,7 @@ const Todo = ({ todos, completeTodo, removeTodo, updateTodo }) => {
         id: null,
         value: ''
       });
+      console.log("submit",value)
     };
   
     if (edit.id) {
@@ -29,7 +30,7 @@ const Todo = ({ todos, completeTodo, removeTodo, updateTodo }) => {
  key ={index}
 >
 <div><input type="checkbox"></input></div>
-<div key={todo.id} onclick={()=> completeTodo(todo.id)}>
+<div key={todo.id} onClick={()=> completeTodo(todo.id)}>
     {todo.text}
 </div>
 <div className="icons">
