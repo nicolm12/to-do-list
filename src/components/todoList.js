@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Component } from 'react'
-import { unmountComponentAtNode } from 'react-dom';
+
 
 import Form from './form'
 import Todo from './todo.js';
@@ -7,10 +7,12 @@ import Todo from './todo.js';
 function TodoList() {
   const [todos, setTodos] = useState([]);
 
+
+  //esta variable junto con el state todos y set todos almacena la informacion de los to dos
   const addTodo = todo => {
-    
+
     if (!todo.text || /^\$*$/.test(todo.text)) {
-     
+
       return;
 
     }
@@ -22,12 +24,13 @@ function TodoList() {
 
   }
 
-
+  //con esta constante podemos eliminar los todos ya hechos
   const removeTodo = id => {
     const removeArray = [...todos].filter(todo => todo.id !== id)
     setTodos(removeArray)
   }
 
+  //con esta podmos editar ls to dos
   const updateTodo = (todoId, newValue) => {
     if (!newValue.text || /^\$*$/.test(newValue.text)) {
       return;
@@ -46,13 +49,13 @@ function TodoList() {
     });
     setTodos(updateTodos);
   };
-  
+
 
 
 
   return (
     <div className='todo-app'>
-      
+
 
       <h1>MI TO DO LIST</h1>
 

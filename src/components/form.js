@@ -12,22 +12,18 @@ function Form(props) {
 
     )
 
-
-    // const inputRef = useRef(null)
-
-    // useEffect(() => {
-    //     inputRef.current.focus()
-    // })
     const handleChange = e => {
         setInput(e.target.value)
     }
+
+    //utilice fetch para traer la data de la api
     const list = () => {
 
         fetch(`https://catfact.ninja/facts?limit=${bred}`)
             .then(res => res.json())
             .then((result) => {
                 result.data.forEach(element => {
-                    console.log("element",element)
+                    console.log("element", element)
                     props.onSubmit({
                         id: Math.floor(Math.random() * 10000),
                         text: element.fact
@@ -46,15 +42,8 @@ function Form(props) {
                 }
             )
 
-        // const i = items.sort(() => Math.random() - 0.5)
-        // const finalList = i.slice(0, bred)
-        // const t = finalList.map(item => (
-        //    setbreed(item.breed)
-
-
-        // )) 
     }
-
+    //esta constante permite que el numero del id de cada todo sea aleatorio y variado
 
     const handleSubmit = e => {
         e.preventDefault();
